@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Lista de Livros</h1>
+  {% if book_list %}
+    <div class="row text-center">
+
+      {% for book in book_list %}
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            {% if book.cover %}
+              <img class="card-img-top" src="{{ book.cover }}" alt="">
+            {% else %}
+              <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+            {% endif %}
+            <div class="card-body">
+              <h4 class="card-title">{{ book.title }}</h4>
+              <p class="card-text">{{ book.author }}</p>
+              <p class="card-text">{{ book.year_publication }}</p>
+              <p class="card-text">{{ book.publisher }}</p>
+            </div>
+            <div class="card-footer">
+              <a href="{{ book.get_absolute_url }}" class="btn btn-primary">Detalhes</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  {% else %}
+    <p class="alert alert-warning">Sem itens na lista.</p>
+  {% endif %}
+{% endblock content %}
